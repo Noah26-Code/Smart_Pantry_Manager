@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "smart_pantry.db";
-    private static final int DATABASE_VERSION = 7;
+    private static final int DATABASE_VERSION = 8;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -61,6 +61,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "Add in cooked rice and eggs." +
                         "Stir until everything is cooked.",
                 chickenFriedRiceIngredients
+        );
+
+        String [][] tomatoChutneyPastaIngredients = {
+                {"Pasta", "2", "cups"},
+                {"Tomatoes", "4", "whole"},
+                {"Onion", "1", "whole"},
+                {"Garlic", "2", "cloves"}
+        };
+
+        insertRecipe(
+                db,
+                "Tomato Chutney Pasta",
+                "Boil pasta in salted water until soft (+- 25 minutes)." +
+                        "Dice onion and garlic and fry until soft." +
+                        "Grate or finely chop tomatoes." +
+                        "Add in tomatoes and cook until softened with the onions and garlic." +
+                        "Add in boiled pasta and mix everything together.",
+                tomatoChutneyPastaIngredients
         );
 
     }
