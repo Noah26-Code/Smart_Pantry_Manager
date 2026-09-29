@@ -2,9 +2,17 @@ package com.example.smartpantrymanager.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.database.Cursor;
+
+import com.example.smartpantrymanager.model.PantryItem;
+import com.example.smartpantrymanager.model.PantryItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -492,5 +500,96 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             }
 
 
+    }
+
+    public List<PantryItem> getAllPantryItems() {
+
+            List<PantryItem> pantryItems = new ArrayList<>();
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(
+                "SELECT id, name, quantity,unit, expiry_date FROM pantry_items", null
+        );
+
+        while (cursor.moveToNext()) {
+
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            double quantity = cursor.getDouble(cursor.getColumnIndexOrThrow("quantity"));
+            String unit = cursor.getString(cursor.getColumnIndexOrThrow("unit"));
+            String expiryDate = cursor.getString(cursor.getColumnIndexOrThrow("expiry_date"));
+
+            PantryItem item = new PantryItem(
+                    id,
+                    name,
+                    quantity,
+                    unit,
+                    expiryDate
+                    );
+
+            pantryItems.add(item);
+        }
+        cursor.close();
+
+        return pantryItems;
+    }
+
+    public long insertPantryItem(String name, double quantity, String unit,String expiryDate) {
+
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+
+            values.put("name", name);
+            values.put("quantity", quantity);
+            values.put("unit", unit);
+
+            if (expiryDate == null || expiryDate.isEmpty()) {
+                values.putNull("expiry_date");
+            } else {
+                values.put("expiry_date", expiryDate);
+            }
+
+            return db.insert("pantry_items", null, values);
+    }
+
+    public int updatePantryItem(
+            int id,
+            String name,
+            double quantity,
+            String unit,
+            String expiryDate) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put("name", name);
+        values.put("quantity", quantity);
+        values.put("unit", unit);
+
+        if (expiryDate == null || expiryDate.isEmpty()) {
+            values.putNull("expiry_date");
+        } else {
+            values.put("exxpiry_date", expiryDate);
+        }
+
+        return db.update(
+                "pantry_items",
+                values,
+                "id = ?",
+                new String[]{String.valueOf(id)}
+        );
+    }
+
+    public int deletePantryItem(int id) {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            return db.delete(
+                    "pantry_items",
+                    "id = ?",
+                    new String[]{String.valueOf(id)}
+            );
     }
 }
