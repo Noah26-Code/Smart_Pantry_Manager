@@ -31,11 +31,19 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp" />
 
+    <Button
+        android:id="@+id/btnSuggestedRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Suggested Recipes"
+        app:layout_constraintTop_toBottomOf="@id/tvPantryTitle"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerPantry"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tvPantryTitle"
+        app:layout_constraintTop_toBottomOf="@+id/btnSuggestedRecipes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

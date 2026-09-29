@@ -10,6 +10,8 @@ import android.database.Cursor;
 
 import com.example.smartpantrymanager.model.PantryItem;
 import com.example.smartpantrymanager.model.PantryItem;
+import com.example.smartpantrymanager.model.Recipe;
+import com.example.smartpantrymanager.model.RecipeIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -572,7 +574,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (expiryDate == null || expiryDate.isEmpty()) {
             values.putNull("expiry_date");
         } else {
-            values.put("exxpiry_date", expiryDate);
+            values.put("expiry_date", expiryDate);
         }
 
         return db.update(
@@ -591,5 +593,93 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "id = ?",
                     new String[]{String.valueOf(id)}
             );
+    }
+
+    public List<Recipe> getAllRecipes() {
+
+            List<Recipe> recipes = new ArrayList<>();
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery(
+                    "SELECT id, name, preparation_instructions FROM recipes", null
+            );
+
+            while (cursor.moveToNext()) {
+
+                int id = cursor.getInt(
+                        cursor.getColumnIndexOrThrow("id")
+                );
+
+                String name = cursor.getString(
+                        cursor.getColumnIndexOrThrow("name")
+                );
+
+                String preparationInstructions = cursor.getString(
+                        cursor.getColumnIndexOrThrow("preparation_instructions")
+                );
+
+                Recipe recipe = new Recipe(
+                        id,
+                        name,
+                        preparationInstructions
+                );
+
+                recipes.add(recipe);
+            }
+
+            cursor.close();
+
+            return recipes;
+    }
+
+    public List<RecipeIngredient> getRecipeIngredients(int recipeId) {
+
+            List<RecipeIngredient> ingredients = new ArrayList<>();
+
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            Cursor cursor = db.rawQuery(
+                    "SELECT id, recipe_id, ingredient_name, quantity, unit " +
+                            "FROM recipe_ingredients WHERE recipe_id = ?",
+                    new String[]{String.valueOf(recipeId)}
+            );
+
+            while (cursor.moveToNext()) {
+
+                int id = cursor.getInt(
+                        cursor.getColumnIndexOrThrow("id")
+                );
+
+                int recipeIdFromDatabase = cursor.getInt(
+                        cursor.getColumnIndexOrThrow("recipe_id")
+                );
+
+                String ingredientName = cursor.getString(
+                        cursor.getColumnIndexOrThrow("ingredient_name")
+                );
+
+                double quantity = cursor.getDouble(
+                        cursor.getColumnIndexOrThrow("quantity")
+                );
+
+                String unit = cursor.getString(
+                        cursor.getColumnIndexOrThrow("unit")
+                );
+
+                RecipeIngredient ingredient = new RecipeIngredient(
+                        id,
+                        recipeIdFromDatabase,
+                        ingredientName,
+                        quantity,
+                        unit
+                );
+
+                ingredients.add(ingredient);
+            }
+
+            cursor.close();
+
+            return ingredients;
     }
 }

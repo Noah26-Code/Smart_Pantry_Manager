@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Intent;
+import android.widget.Button;
 
 import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.adapter.PantryAdapter;
@@ -46,6 +47,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
         loadPantryItems();
+
+        Button btnSuggestedRecipes = findViewById(R.id.btnSuggestedRecipes);
+
+        btnSuggestedRecipes.setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    MainActivity.this,
+            SuggestedRecipesActivity.class
+            );
+
+            startActivity(intent);
+        });
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
