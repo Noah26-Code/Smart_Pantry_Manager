@@ -3,6 +3,7 @@ package com.example.smartpantrymanager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.content.Intent;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -70,7 +71,17 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         RecipeAdapter adapter = new RecipeAdapter(
                 suggestedRecipes,
                 recipe -> {
-                    //open recipe detail here later
+
+                    Intent intent = new Intent(
+                            SuggestedRecipesActivity.this,
+                            RecipeDetailActivity.class
+                    );
+
+                    intent.putExtra("recipe_id", recipe.getId());
+                    intent.putExtra("recipe_name", recipe.getName());
+                    intent.putExtra("recipe_instructions", recipe.getPreparationInstructions());
+
+                    startActivity(intent);
                 }
         );
 
