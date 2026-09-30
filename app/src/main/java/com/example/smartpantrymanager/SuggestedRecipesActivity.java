@@ -19,6 +19,7 @@ import com.example.smartpantrymanager.model.PantryItem;
 import com.example.smartpantrymanager.model.Recipe;
 import com.example.smartpantrymanager.model.RecipeIngredient;
 import com.example.smartpantrymanager.utils.RecipeMatcher;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,6 +51,43 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         );
 
         loadSuggestedRecipes();
+
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+
+        bottomNavigation.setSelectedItemId(R.id.navRecipes);
+
+        bottomNavigation.setOnItemSelectedListener(item -> {
+
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.navRecipes) {
+                return true;
+            }
+
+            if (itemId == R.id.navPantry) {
+                Intent intent = new Intent(
+                        SuggestedRecipesActivity.this,
+                        MainActivity.class
+                );
+
+                intent.addFlags(
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP
+                );
+
+                startActivity(intent);
+                return true;
+            }
+
+            if (itemId == R.id.navSettings) {
+                startActivity(new Intent(SuggestedRecipesActivity.this,
+                        SettingsActivity.class
+                ));
+
+                return true;
+            }
+
+            return false;
+        });
     }
 
     private void loadSuggestedRecipes() {

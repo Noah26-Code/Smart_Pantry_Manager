@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Intent;
-import android.widget.Button;
 
 import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.adapter.PantryAdapter;
 import com.example.smartpantrymanager.model.PantryItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,23 +48,46 @@ public class MainActivity extends AppCompatActivity {
 
         loadPantryItems();
 
-        Button btnSuggestedRecipes = findViewById(R.id.btnSuggestedRecipes);
-
-        btnSuggestedRecipes.setOnClickListener(v -> {
-
-            Intent intent = new Intent(
-                    MainActivity.this,
-            SuggestedRecipesActivity.class
-            );
-
-            startActivity(intent);
-        });
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+
+        bottomNavigation.setSelectedItemId(R.id.navPantry);
+
+        bottomNavigation.setOnItemSelectedListener(item -> {
+
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.navPantry) {
+                return true;
+            }
+
+            if (itemId == R.id.navRecipes) {
+
+                startActivity(new Intent(
+                        MainActivity.this,
+                        SuggestedRecipesActivity.class
+                ));
+
+                return true;
+            }
+
+            if (itemId == R.id.navSettings) {
+
+                startActivity(new Intent(
+                        MainActivity.this,
+                        SettingsActivity.class
+                ));
+
+                return true;
+            }
+
+            return false;
         });
     }
 

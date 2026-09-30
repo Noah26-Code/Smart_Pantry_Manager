@@ -7,29 +7,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SuggestedRecipesActivity"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Suggested Recipes"
         android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:padding="24dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="0dp"
         android:text="Meals to make from your current pantry"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:paddingLeft="24dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerRecipes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="20dp"
+        android:paddingLeft="24dp"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_bar"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/tvNoRecipes"
