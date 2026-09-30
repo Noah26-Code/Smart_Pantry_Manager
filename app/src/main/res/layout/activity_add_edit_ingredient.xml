@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,58 +11,107 @@
     android:padding="24dp"
     tools:context=".AddEditIngredientActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
     <TextView
+        android:id="@+id/tvIngredientFormTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Ingredient"
         android:textSize="28sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etIngredientName"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:hint="Ingredient Name"
-        android:inputType="text" />
+        android:layout_marginTop="8dp"
+        android:text="Enter ingrdient details below."
+        android:textSize="16sp" />
 
-    <EditText
-        android:id="@+id/etQuantity"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:hint="Ingredient Name"
+        app:boxBackgroundMode="outline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etIngredientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textCapWords" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Quantity"
+        app:boxBackgroundMode="outline">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:inputType="numberDecimal" />
 
-    <EditText
-        android:id="@+id/etUnit"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Unit(e.g. cups, whole, kg, g)"
+        android:hint="Unit"
+        app:boxBackgroundMode="outline">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etUnit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/etExpiryDate"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:hint="Expiry Date (Optional)"
-        android:inputType="date" />
+        app:boxBackgroundMode="outline">
 
-    <Button
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etExpiryDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:cursorVisible="false"
+        android:focusable="false" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSaveingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="28dp"
         android:text="Save Ingredient" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnDeleteIngredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:text="Delete Ingredient"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:backgroundTint="@android:color/holo_red_dark" />
+
 
 </LinearLayout>
+
+</ScrollView>

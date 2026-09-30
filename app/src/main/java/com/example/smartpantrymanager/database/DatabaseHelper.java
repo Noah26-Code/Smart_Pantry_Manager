@@ -66,11 +66,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertRecipe(
                 db,
                 "Chicken Fried Rice",
-                "Boil rice for approximately 20 - 30 minutes." +
-                        "After adding spices to chicken, fry chicken for approximately 15 minutes on medium heat." +
-                        "Add in mixed vegetables and fry for an additional 10 minutes." +
-                        "Add in cooked rice and eggs." +
-                        "Stir until everything is cooked.",
+                "Boil rice for approximately 20 - 30 minutes\n." +
+                        "\nAfter adding spices to chicken, fry chicken for approximately 15 minutes on medium heat.\n" +
+                        "Add in mixed vegetables and fry for an additional 10 minutes.\n" +
+                        "Add in cooked rice and eggs.\n" +
+                        "Stir until everything is cooked.\n",
                 chickenFriedRiceIngredients
         );
 

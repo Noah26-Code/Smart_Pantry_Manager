@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.app.AlertDialog;
+import android.widget.TextView;
+import android.app.DatePickerDialog;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.smartpantrymanager.database.DatabaseHelper;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class AddEditIngredientActivity extends AppCompatActivity {
 
@@ -40,6 +45,11 @@ public class AddEditIngredientActivity extends AppCompatActivity {
         etQuantity = findViewById(R.id.etQuantity);
         etunit = findViewById(R.id.etUnit);
         etExpiryDate = findViewById(R.id.etExpiryDate);
+
+        etExpiryDate.setFocusable(false);
+        etExpiryDate.setFocusable(true);
+
+        etExpiryDate.setOnClickListener(v -> showDatePicker());
 
         ingredientId = getIntent().getIntExtra("ingredient_id", -1);
 
@@ -84,6 +94,46 @@ public class AddEditIngredientActivity extends AppCompatActivity {
 
             btnDeleteIngredient.setOnClickListener(v -> confirmDelete());
         }
+
+        TextView tvIngredientFormTitle = findViewById(R.id.tvIngredientFormTitle);
+
+        if (ingredientId == -1) {
+            tvIngredientFormTitle.setText("Add Ingredient");
+        } else {
+            tvIngredientFormTitle.setText("Edit Ingredient");
+        }
+
+    }
+
+    private void showDatePicker() {
+
+        Calendar calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog =
+                new DatePickerDialog(
+                this,
+                (view, selectedYear, selectedMonth, selectedDay) -> {
+
+                    String selectedDate = String.format(
+                            Locale.getDefault(),
+                            "%04d-%02d-%02d",
+                            selectedYear,
+                            selectedMonth + 1,
+                            selectedDay
+                    );
+
+                    etExpiryDate.setText(selectedDate);
+                },
+                        year,
+                        month,
+                        day
+        );
+
+        datePickerDialog.show();
     }
 
     private void saveIngredient() {

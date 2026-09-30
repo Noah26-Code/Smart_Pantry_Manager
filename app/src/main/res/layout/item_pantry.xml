@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:layout_marginBottom="8dp"
-    android:background="#EEEEEE">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="5dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="#4242F5">
 
-    <TextView
-        android:id="@+id/tvIngredientName"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chicken"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvIngredientQuantity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2 cups"
-        android:textSize="16sp"
-        android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/tvIngredientName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredient Name"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvIngredientExpiry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Expires: 30/09/2026"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp" />
+        <TextView
+            android:id="@+id/tvIngredientQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="2 cups"
+            android:textSize="16sp" />
 
+        <TextView
+            android:id="@+id/tvIngredientExpiry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Expires: 2026-10-15"
+            android:textSize="14sp" />
 
-</LinearLayout>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

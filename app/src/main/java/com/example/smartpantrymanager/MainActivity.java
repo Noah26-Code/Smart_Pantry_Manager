@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.content.Intent;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.smartpantrymanager.database.DatabaseHelper;
 import com.example.smartpantrymanager.adapter.PantryAdapter;
@@ -104,7 +106,17 @@ public class MainActivity extends AppCompatActivity {
 
         List<PantryItem> pantryItems = dbHelper.getAllPantryItems();
 
+        TextView tvEmptyPantry = findViewById(R.id.tvEmptyPantry);
+
         RecyclerView recyclerPantry = findViewById(R.id.recyclerPantry);
+
+        if (pantryItems.isEmpty()) {
+            recyclerPantry.setVisibility(View.GONE);
+            tvEmptyPantry.setVisibility(View.VISIBLE);
+        } else {
+            recyclerPantry.setVisibility(View.VISIBLE);
+            tvEmptyPantry.setVisibility(View.GONE);
+        }
 
         PantryAdapter adapter = new PantryAdapter(pantryItems, item -> {
 

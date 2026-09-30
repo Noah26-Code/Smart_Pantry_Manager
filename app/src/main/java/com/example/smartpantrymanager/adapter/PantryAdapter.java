@@ -43,7 +43,11 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
 
         holder.tvIngredientName.setText(item.getName());
 
-        holder.tvIngredientQuantity.setText(item.getQuantity() + " " + item.getUnit());
+       holder.tvIngredientQuantity.setText(
+               formatQuantity(item.getQuantity())
+               + " "
+               + item.getUnit()
+       );
 
         if (item.getExpiryDate() == null || item.getExpiryDate().isEmpty()) {
             holder.tvIngredientExpiry.setText("No expiry date.");
@@ -54,6 +58,15 @@ public class PantryAdapter extends RecyclerView.Adapter<PantryAdapter.PantryView
         holder.itemView.setOnClickListener(v -> {
             listener.onItemClick(item);
         });
+    }
+
+    private String formatQuantity(double quantity) {
+
+        if (quantity == Math.floor(quantity)) {
+            return String.valueOf((int) quantity);
+        }
+
+        return String.valueOf(quantity);
     }
 
     @Override

@@ -45,9 +45,47 @@ public class RecipeDetailActivity extends AppCompatActivity {
         String preparationInstructions = getIntent().getStringExtra("recipe_instructions");
 
         tvRecipeDetailName.setText(recipeName);
-        tvPreparationInstructions.setText(preparationInstructions);
+        tvPreparationInstructions.setText(formatInstructions(preparationInstructions)
+        );
 
         loadRecipeIngredients(recipeId);
+    }
+
+    private String formatInstructions(String instructions) {
+
+        if (instructions == null || instructions.trim().isEmpty()) {
+            return "No preparation instructions available.";
+        }
+
+        String[] steps = instructions.trim().split("(?<=[.!?])\\s*");
+
+        StringBuilder formattedInstructions = new StringBuilder();
+
+        int stepNumber = 1;
+
+        for (String step : steps) {
+
+            if (!step.trim().isEmpty()) {
+                formattedInstructions
+                        .append(stepNumber)
+                        .append(". ")
+                        .append(step.trim())
+                        .append("\n\n");
+
+                stepNumber++;
+            }
+        }
+
+        return formattedInstructions.toString().trim();
+    }
+
+    private String formatQuantity(double quantity) {
+
+        if (quantity == Math.floor(quantity)) {
+            return String.valueOf((int)  quantity);
+        }
+
+        return String.valueOf(quantity);
     }
 
     private void loadRecipeIngredients(int recipeId) {
@@ -62,7 +100,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     .append(". ")
                     .append(ingredient.getRecipeId())
                     .append(" - ")
-                    .append(ingredient.getQuantity())
+                    .append(formatQuantity(ingredient.getQuantity()))
                     .append(" ")
                     .append(ingredient.getUnit())
                     .append("\n");
