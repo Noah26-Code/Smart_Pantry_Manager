@@ -108,6 +108,40 @@ public class RecipeMatcher {
             case "slice":
                 return "slice";
 
+            case "cloves":
+            case "clove":
+                return "clove";
+
+            case "packets":
+            case "packet":
+                return "packet";
+
+            case "strips":
+            case "strip":
+                return "strip";
+
+            case "pieces":
+            case "piece":
+                return "piece";
+
+            case "cans":
+            case "can":
+                return "can";
+
+            case "millilitres":
+            case "milliliters":
+            case "millilitre":
+            case "milliliter":
+            case "ml":
+                return "ml";
+
+            case "litres":
+            case "liters":
+            case "litre":
+            case "liter":
+            case "l":
+                return "l";
+
             default:
                 return normalized;
         }

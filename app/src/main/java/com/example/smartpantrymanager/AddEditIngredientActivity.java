@@ -2,12 +2,14 @@ package com.example.smartpantrymanager;
 
 import android.os.Bundle;
 
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import android.app.AlertDialog;
 import android.widget.TextView;
 import android.app.DatePickerDialog;
+import android.widget.ArrayAdapter;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +27,9 @@ public class AddEditIngredientActivity extends AppCompatActivity {
     private int ingredientId = -1;
     private EditText etIngredientName;
     private EditText etQuantity;
-    private EditText etunit;
+    private AutoCompleteTextView etUnit;
+
+
     private EditText etExpiryDate;
 
     private DatabaseHelper dbHelper;
@@ -43,11 +47,22 @@ public class AddEditIngredientActivity extends AppCompatActivity {
 
         etIngredientName = findViewById(R.id.etIngredientName);
         etQuantity = findViewById(R.id.etQuantity);
-        etunit = findViewById(R.id.etUnit);
+        etUnit = findViewById(R.id.etUnit);
         etExpiryDate = findViewById(R.id.etExpiryDate);
 
+        String[] units = getResources().getStringArray(R.array.ingredient_units);
+
+        ArrayAdapter<String> unitAdapter =
+                new ArrayAdapter<>(
+                        this,
+                        android.R.layout.simple_dropdown_item_1line,
+                        units
+                );
+
+        etUnit.setAdapter(unitAdapter);
+
         etExpiryDate.setFocusable(false);
-        etExpiryDate.setFocusable(true);
+        etExpiryDate.setClickable(true);
 
         etExpiryDate.setOnClickListener(v -> showDatePicker());
 
@@ -65,7 +80,7 @@ public class AddEditIngredientActivity extends AppCompatActivity {
                     )
             );
 
-            etunit.setText(
+            etUnit.setText(
                     getIntent().getStringExtra("ingredient_unit")
             );
 
@@ -83,11 +98,6 @@ public class AddEditIngredientActivity extends AppCompatActivity {
 
         btnSaveIngredient.setOnClickListener(v -> saveIngredient());
 
-        if (ingredientId != -1) {
-            btnDeleteIngredient.setVisibility(Button.VISIBLE);
-
-            btnDeleteIngredient.setOnClickListener(v -> deleteIngredient());
-        }
 
         if (ingredientId != -1) {
             btnDeleteIngredient.setVisibility(Button.VISIBLE);
@@ -140,7 +150,7 @@ public class AddEditIngredientActivity extends AppCompatActivity {
 
         String name = etIngredientName.getText().toString().trim();
         String quantityText = etQuantity.getText().toString().trim();
-        String unit = etunit.getText().toString().trim();
+        String unit = etUnit.getText().toString().trim();
         String expiryDate = etExpiryDate.getText().toString().trim();
 
         if (name.isEmpty()) {
@@ -154,7 +164,7 @@ public class AddEditIngredientActivity extends AppCompatActivity {
         }
 
         if (unit.isEmpty()) {
-            etunit.setError("Please enter a unit");
+            etUnit.setError("Please enter a unit");
             return;
         }
 

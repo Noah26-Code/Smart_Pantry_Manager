@@ -98,7 +98,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
             ingredientText
                     .append(". ")
-                    .append(ingredient.getRecipeId())
+                    .append(ingredient.getIngredientName())
                     .append(" - ")
                     .append(formatQuantity(ingredient.getQuantity()))
                     .append(" ")

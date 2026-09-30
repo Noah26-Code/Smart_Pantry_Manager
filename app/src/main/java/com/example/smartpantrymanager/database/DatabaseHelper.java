@@ -19,7 +19,7 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "smart_pantry.db";
-    private static final int DATABASE_VERSION = 21;
+    private static final int DATABASE_VERSION = 23;
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -57,17 +57,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createRecipeIngredientsTable);
 
         String[][] chickenFriedRiceIngredients = { //1
-                {"Rice", "2", "cups"},
-                {"Chicken", "1", "cup"},
+                {"Rice", "500", "grams"},
+                {"Chicken", "300", "grams"},
                 {"Eggs", "2", "whole"},
-                {"Mixed Vegetables", "1", "cup"}
+                {"Mixed Vegetables", "100", "grams"}
         };
 
         insertRecipe(
                 db,
                 "Chicken Fried Rice",
                 "Boil rice for approximately 20 - 30 minutes\n." +
-                        "\nAfter adding spices to chicken, fry chicken for approximately 15 minutes on medium heat.\n" +
+                        "After adding spices to chicken, fry chicken for approximately 15 minutes on medium heat.\n" +
                         "Add in mixed vegetables and fry for an additional 10 minutes.\n" +
                         "Add in cooked rice and eggs.\n" +
                         "Stir until everything is cooked.\n",
@@ -75,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         String [][] tomatoChutneyPastaIngredients = { //2
-                {"Pasta", "2", "cups"},
+                {"Pasta", "500", "grams"},
                 {"Tomatoes", "4", "whole"},
                 {"Onion", "1", "whole"},
                 {"Garlic", "2", "cloves"}
@@ -96,7 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 {"2-minute Noodles", "2", "packets"},
                 {"Milk", "1", "cup"},
                 {"Hot Sauce", "5", "tablespoons"},
-                {"Cheese", "1", "cup"},
+                {"Cheese", "30", "grams"},
         };
 
         insertRecipe(
@@ -113,13 +113,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         String [][] pastaAndMinceIngredients = { //4
-                {"Pasta", "2", "cups"},
-                {"Mince", "2", "cups"},
+                {"Pasta", "500", "grams"},
+                {"Mince", "500", "grams"},
                 {"Ginger & Garlic paste", "1", "teaspoon"},
                 {"Salt", "1", "teaspoon"},
                 {"Black Pepper", "1", "teaspoon"},
                 {"Onion", "1", "whole"},
-                {"Chilli Powder", "3", "tablespoons"}
+                {"Chilli Powder", "5", "tablespoons"}
         };
 
         insertRecipe(
@@ -138,7 +138,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String [][] baconAndCheeseOmeletteIngredients = { //5
                 {"Eggs", "3", "whole"},
                 {"Bacon", "3", "strips"},
-                {"Cheese", "1", "cup"},
+                {"Cheese", "50", "grams"},
                 {"Salt", "1", "teaspoon"},
                 {"Black Pepper", "1", "teaspoon"},
         };
@@ -157,9 +157,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String [][] eggFriedRiceIngredients = { //6
                 {"Eggs", "3", "whole"},
-                {"Rice", "2", "cups"},
+                {"Rice", "500", "grams"},
                 {"Onion", "1", "whole"},
-                {"Mixed Vegetables", "1", "cup"}
+                {"Mixed Vegetables", "100", "grams"}
         };
 
         insertRecipe(
@@ -175,9 +175,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String [][] chickenSubIngredients = { //7
                 {"Bread Roll", "1", "whole"},
-                {"Chicken", "1", "cup"},
+                {"Chicken", "200", "grams"},
                 {"Mayonnaise", "4", "tablespoons"},
-                {"Lettuce", "1", "cup"}
+                {"Lettuce", "75", "grams"}
         };
 
         insertRecipe(
@@ -209,11 +209,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         String [][] steakStirFryIngredients = { //9
-                {"Steak strips", "2", "cups"},
+                {"Steak strips", "200", "grams"},
                 {"Onion", "1", "whole"},
-                {"Mixed Vegetables", "1", "cup"},
+                {"Mixed Vegetables", "100", "grams"},
                 {"Mixed Spices", "2", "tablespoons"},
-                {"Soy Sauce", "0.5", "cups"}
+                {"Soy Sauce", "30", "millilitres"}
         };
 
         insertRecipe(
@@ -227,8 +227,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String [][] chickenSaladWrapIngredients = { //10
                 {"Tortilla Wrap", "1", "whole"},
-                {"Chicken", "1", "cup"},
-                {"Lettuce", "1", "cup"},
+                {"Chicken", "300", "grams"},
+                {"Lettuce", "100", "grams"},
                 {"Tomato", "1", "whole"},
                 {"Sauce", "3", "tablespoons"}
         };
@@ -246,8 +246,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String [] [] cheeseToastIngredients = { //11
                 {"Bread", "2", "slices"},
-                {"Butter", "1", "tablespoon"},
-                {"Cheese", "1", "cup"},
+                {"Butter", "5", "grams"},
+                {"Cheese", "100", "grams"},
                 {"Chillies", "2", "whole"}
         };
 
@@ -262,9 +262,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         String [] [] macAndCheeseIngredients = { //12
-                {"Macaroni", "2", "cups"},
+                {"Macaroni", "500", "grams"},
                 {"milk", "1", "cup"},
-                {"Cheese", "1", "cup"},
+                {"Cheese", "100", "grams"},
                 {"Black Pepper", "1", "tablespoon"}
         };
 
@@ -280,7 +280,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String[][] chickenOmeletteIngredients = { //13
                 {"Eggs", "3", "whole"},
-                {"Chicken", "1", "cup"},
+                {"Chicken", "100", "grams"},
                 {"Onion", "1", "whole"},
                 {"Black Pepper", "1", "tablespoon"}
         };
@@ -331,8 +331,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String [][] loadedPotatoIngredients = { //16
                 {"Potato", "1", "whole"},
-                {"Mince", "1", "cup"},
-                {"Cheese", "1", "cup"},
+                {"Mince", "500", "grams"},
+                {"Cheese", "150", "grams"},
                 {"Curry Powder", "2", "tablespoons"}
         };
 
@@ -341,7 +341,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "Loaded Potato",
                 "Place potato in oven at 180 degrees for approximately 1 hour." +
                         "Mix mince and curry powder in a pan and cook until brown." +
-                        "Slice the potato down the middle and plac cooked mince inside." +
+                        "Slice the potato down the middle and place cooked mince inside." +
                         "Top with grated cheese.",
                 loadedPotatoIngredients
 
@@ -350,7 +350,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String [][] veggieOmeletteIngredients = { //17
                 {"Eggs", "3", "whole"},
                 {"Mushrooms", "3", "whole"},
-                {"Cheese", "1", "cup"},
+                {"Cheese", "100", "grams"},
                 {"Black Pepper", "1", "teaspoon"}
         };
 
@@ -364,9 +364,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         String [][] chickenChipBowlIngredients = { //18
-                {"Potato Chips", "2", "cups"},
-                {"Chicken Strips", "2", "cups"},
-                {"Cheese", "1", "cup"},
+                {"Potato Chips", "200", "grams"},
+                {"Chicken Strips", "200", "grams"},
+                {"Cheese", "100", "grams"},
         };
 
         insertRecipe(
@@ -395,10 +395,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
 
         String [][] steakAndMashIngredients = { //20
-                {"Steak Strips", "2", "cups"},
+                {"Steak Strips", "200", "grams"},
                 {"Potatoes", "4", "whole"},
                 {"Black Pepper", "1", "teaspoon"},
-                {"Butter", "1", "tablespoon"}
+                {"Butter", "10", "grams"}
         };
 
         insertRecipe(
